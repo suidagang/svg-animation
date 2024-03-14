@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>环形进度条</title>
+    <style>
+      .svg-wrap {
+        stroke-width: 3px;
+        background-color: black;
+      }
+
+      .rect {
+        height: 60px;
+        width: 220px;
+        stroke: #fff;
+        fill: transparent;
+        stroke-dasharray: 220 60;
+        stroke-dashoffset: -260;
+        stroke-width: 4px;
+      }
+
+      .text {
+        fill: #1287f4;
+        font-size: 30px;
+      }
+
+      .svg-wrap:hover .rect {
+        animation: line-move 0.5s linear forwards;
+      }
+
+      .svg-wrap:hover .text {
+        /* fill: #fff;
+        transition: all 1s ease-in-out; */
+      }
+
+      @keyframes line-move {
+        0% {
+          stroke-dasharray: 220 60;
+          stroke-dashoffset: -260;
+          stroke-width: 4px;
+          stroke: #e32727;
+        }
+        to {
+          stroke-dasharray: 560;
+          stroke-dashoffset: 0;
+          stroke-width: 2px;
+          stroke: #1234f4;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg class="svg-wrap">
+      <text class="text" x="60" y="75">CLICK HERE</text>
+      <rect class="rect" x="40" y="35" />
+    </svg>
+
+    <button onclick="setProcessCircle(50)">加载100%</button>
+  </body>
+  <script>
+    // window.onload = function () {
+    function setProcessCircle(percent = 0) {
+      const processCircle = document.querySelector(".process-circle");
+
+      // 获取圆的周长
+      const circumference = processCircle.getTotalLength();
+
+      // 把周长赋值给 strokeDasharray
+      processCircle.style.strokeDasharray = circumference;
+
+      // 动态计算 offset 赋值给 strokeDashoffset
+      // 为了支持 percent = 0 | '0%'，所以使用 parseInt 转换
+      processCircle.style.strokeDashoffset =
+        circumference * (1 - parseInt(percent) / 100);
+    }
+    // };
+  </script>
+</html>
