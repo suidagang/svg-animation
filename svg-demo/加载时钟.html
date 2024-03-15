@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>加载时钟</title>
+    <style>
+      .fast-hand {
+        animation: clock-rotate 2s linear infinite; /*动画时间设置不同*/
+      }
+      .slow-hand {
+        animation: clock-rotate 15s linear infinite; /*动画时间设置不同*/
+      }
+      @keyframes clock-rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg height="0" width="0">
+      <symbol id="clock" viewBox="-52 -52 104 104">
+        <circle
+          fill="none"
+          stroke="currentColor"
+          stroke-width="6"
+          stroke-miterlimit="10"
+          cx="0"
+          cy="0"
+          r="48"
+        />
+        <line
+          class="fast-hand"
+          fill="none"
+          stroke-linecap="round"
+          stroke="currentColor"
+          stroke-width="6"
+          stroke-miterlimit="10"
+          x1="0"
+          y1="0"
+          x2="35"
+          y2="0.5"
+        ></line>
+        <line
+          class="slow-hand"
+          fill="none"
+          stroke-linecap="round"
+          stroke="currentColor"
+          stroke-width="6"
+          stroke-miterlimit="10"
+          x1="0"
+          y1="0"
+          x2="-0.5"
+          y2="-24"
+        ></line>
+      </symbol>
+    </svg>
+    <div style="color: #fa8919; font-size: 16px">
+      <svg
+        height="26"
+        width="26"
+        style="vertical-align: top; margin-top: -2px; margin-right: 3px"
+      >
+        <use href="#clock"></use>
+      </svg>
+      <span>等待中</span>
+    </div>
+  </body>
+</html>
